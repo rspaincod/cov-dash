@@ -19,7 +19,14 @@ export default class DataFetcher {
         const timeConv = d3.timeParse("%d-%b-%Y");
         const dataset = d3.csv("http://localhost:3000/data/change_weekly_states.csv");
         const states = constants.States;
-        
+        for (var i=0; i < states.length;i++){
+           // let state = 
+           // const result = words.filter(word => word.length > 6);
+
+           // For max element
+           // console.log(Math.max(...array1));
+        }
+
         dataset.then(function (data) {
             const slices = data.columns.slice(1).map(function (id) {
                 return {
@@ -41,11 +48,11 @@ export default class DataFetcher {
     async fetchUsMap() {
 
         const promises =
-            [d3.csv('http://localhost:3000/data/current_states.csv'),
-            d3.json('http://localhost:3000/data/us-states.json'),
-            d3.csv('http://localhost:3000/data/change_30_60.csv'),
-            d3.csv('http://localhost:3000/data/change_30_60_US.csv'),
-            d3.csv('http://localhost:3000/data/current_US.csv')];
+            [d3.csv('../data/current_states.csv'),
+            d3.json('../data/us-states.json'),
+            d3.csv('../data/change_30_60.csv'),
+            d3.csv('../data/change_30_60_US.csv'),
+            d3.csv('../data/current_US.csv')];
 
         const values = await Promise.all(promises);
         this.current_states = values[0];
