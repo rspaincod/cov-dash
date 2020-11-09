@@ -11,3 +11,191 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.App {
+/*  margin:0px 20px; */
+}
+
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+  color:blue;
+}
+
+.nav-container { 
+  background-color:#eee;
+  border-bottom: 1px solid #ccc;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  width:100%;
+}
+.nav-link {
+ 
+  font-size: .9375rem;
+  font-weight: 600;
+  text-decoration: none;
+  color:rgb(5, 5, 5);
+ /* width: 200px; */
+
+  border: 1px solid #ccc;
+  border-top-style:none;
+  border-left-style:none;
+  border-bottom-style:none;
+  padding: 5px 40px;
+  display: inline-block;
+  text-align: center;
+}
+
+.nav-link:hover {
+  text-decoration: none;
+}
+
+.nav-link-active {
+  border-bottom-color: royalblue;
+  border-bottom-style: solid;
+}
+
+a, a:visited {
+  color:rgb(5, 5, 5);
+} 
+
+.nav-link:hover {
+  color:#000;
+  background-color:#eee;
+  background-color:#fff;
+}
+
+.content {
+  margin-top:34px;
+
+}
+
+.page-content {
+  margin:0px 20px;
+}
+
+.sub-head {
+  font-size:15px;
+}
+
+.para-content {
+  margin-left:auto;
+  margin-right:auto;
+  max-width: 54rem;
+}
+
+.week-label {
+  font-size: 4em;
+  margin: 5px auto 0px auto;
+  text-align: center;
+  height:60px;
+  width:15% !important;
+  border-radius:10px;
+  padding-top:10px;
+  border:1px solid#eee;
+
+}
+
+/* Map info */
+.map-title {
+  margin:10px auto;
+  text-align:center;
+  font-size:2em;
+  font-weight:bold;
+}
+
+.map-description {
+  margin:0px auto;
+  text-align:center;
+  font-size:1.5em;
+}
+
+.map-date {
+  width:100%;
+  text-align:center;
+  font-size:3em;
+}
+
+.map-title-first {
+  margin-top:45px;
+}
+
+/* Map US summary */
+.map-us-summary {
+  margin:10px auto  120px;
+  width:100%;
+  text-align:center;
+}
+
+.map-us-summary-title {
+  font-size:1.5em;
+  font-weight:bold;
+}
+
+.map-us-summary-subtitle {
+  
+  font-weight:bold;
+  font-size:1.5em;
+}
+
+.map-us-summary-value {
+  display:inline-block;
+  font-size:1.25em;
+}
+
+
+.radio-button-group{
+  margin: 5px auto 0px auto;
+  text-align:center;
+  width:100%;
+}
+
+.radio-button {
+ display:inline;
+  margin-right:5px;
+}
+
+.check-reptype {
+  display: inline;
+  margin-right:3px;
+  vertical-align:middle;
+}
+
+.radio-button label {
+  display: inline;
+  line-height: 20px;
+  vertical-align: top;
+}
+
+.radio-button-margin {
+  margin-left: 20px;
+}
+
+.control-button {
+  margin: 5px auto 0px auto;
+
+}
+
+
+
+
+/* Loader */
+.svgLoader {
+  animation: spin 0.5s linear infinite;
+  margin: auto;
+}
+.divLoader {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
