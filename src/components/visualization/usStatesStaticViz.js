@@ -118,10 +118,18 @@ class UsStatesStaticViz extends Component {
 
             })
             .attr("x", function (d) {
-                return path.centroid(d)[0];
+                if (d.properties.offsetX){
+                    return path.centroid(d)[0] + d.properties.offsetX;
+                } else {
+                    return path.centroid(d)[0];
+                }                
             })
             .attr("y", function (d) {
-                return path.centroid(d)[1];
+                if (d.properties.offsetY){
+                    return path.centroid(d)[1] + d.properties.offsetY;
+                } else {
+                    return path.centroid(d)[1];
+                }               
             })
             .attr("text-anchor", "middle")
             .style("fill", "rgb(5,5,5)");
@@ -150,11 +158,19 @@ class UsStatesStaticViz extends Component {
                     default:
                 }
             })
-            .attr("x", function (d) {
-                return path.centroid(d)[0];
+             .attr("x", function (d) {
+                if (d.properties.offsetX){
+                    return path.centroid(d)[0] + d.properties.offsetX;
+                } else {
+                    return path.centroid(d)[0];
+                }                
             })
             .attr("y", function (d) {
-                return path.centroid(d)[1] + 10;
+                if (d.properties.offsetY){
+                    return path.centroid(d)[1] + 10 + d.properties.offsetY;
+                } else {
+                    return path.centroid(d)[1] + 10;
+                }               
             })
             .attr("text-anchor", "middle")
             .style("fill", "rgb(5,5,5)");

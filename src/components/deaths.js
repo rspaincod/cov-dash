@@ -33,6 +33,11 @@ class Deaths extends Component {
             death100k: Number(f.current_US[0].death100k)
         }
 
+        var colors = ['#009392','#72aaa1','#b1c7b3','#f1eac8','#e5b9ad','#d98994','#d0587e'];
+        var col_domain = f.getColDomain(f.change_30_60, colors, 'deaths_change_30_60');
+        var col_domain_cum100k = f.getColDomain(f.current_states, colors, 'cumulative_deaths_100k');
+        var col_domain_cum = f.getColDomain(f.current_states, colors, 'cumulative_deaths');
+
         this.setState({
             stateDat: f.current_states
             , change_30_60: f.change_30_60
@@ -43,12 +48,16 @@ class Deaths extends Component {
             , height: height
             , repDate: f.change_report_date
             , label3060: f.change_report_date_3060_message
+            , col_domain: col_domain
+            , col_range: colors
+            , col_domain_cum100k: col_domain_cum100k
+            , col_domain_cum: col_domain_cum
         });
 
     }
 
     render() {
-        const { mapDat, change_30_60, change_30_60_US, current_US, label3060, stateDat, repDate, height, width } = this.state;
+        const { mapDat, change_30_60, change_30_60_US, current_US, label3060, stateDat, repDate, height, width, col_domain, col_range, col_domain_cum100k, col_domain_cum  } = this.state;
         if (repDate) {
             return (
                 <div className="page-content">
@@ -58,8 +67,8 @@ class Deaths extends Component {
                         rep_type="deaths_change_30_60"
                         rep_date={repDate}
                         label3060={label3060}
-                        col_domain={[-50, 50, 500]}
-                        col_range={['#ffc6c4', '#cc607d', '#672044']}
+                        col_domain={col_domain}
+                        col_range={col_range}
                         width={width}
                         height={height}
                     />
@@ -77,8 +86,8 @@ class Deaths extends Component {
                         state_dat={stateDat}
                         rep_type="cumulative_deaths"
                         rep_date={repDate}
-                        col_domain={[0, 2000, 20000]}
-                        col_range={['#ffc6c4', '#cc607d', '#672044']}
+                        col_domain={col_domain_cum}
+                        col_range={col_range}
                         width={width}
                         height={height}
                     />
@@ -90,8 +99,8 @@ class Deaths extends Component {
                         state_dat={stateDat}
                         rep_type="cumulative_deaths_100k"
                         rep_date={repDate}
-                        col_domain={[0, 70, 160]}
-                        col_range={['#ffc6c4', '#cc607d', '#672044']}
+                        col_domain={col_domain_cum100k}
+                        col_range={col_range}
                         width={width}
                         height={height}
                     />

@@ -20,6 +20,13 @@ class Tests extends Component {
         const f = new DataFetch();
         await f.fetchUsMap();
 
+        var colors = ['#009392','#72aaa1','#b1c7b3','#f1eac8','#e5b9ad','#d98994','#d0587e'];
+        var col_domain = f.getColDomain(f.change_30_60, colors, 'tests_change_30_60');
+        var col_domain_cum100k = f.getColDomain(f.current_states, colors, 'cumulative_tests_100k');
+        var col_domain_cum = f.getColDomain(f.current_states, colors, 'cumulative_tests');
+        var col_domain_positivity = f.getColDomain(f.change_30_60, colors, 'positivity_change_30_60');
+
+
         this.setState({
             stateDat: f.current_states
             , change_30_60: f.change_30_60
@@ -28,12 +35,17 @@ class Tests extends Component {
             , width: width
             , height: height
             , repDate: f.change_report_date
+            , col_domain: col_domain
+            , col_range: colors
+            , col_domain_cum100k: col_domain_cum100k
+            , col_domain_cum: col_domain_cum
+            , col_domain_positivity: col_domain_positivity
         });
         
     }
 
     render() {
-        const { mapDat, stateDat, change_30_60, label3060, repDate, height, width } = this.state;
+        const { mapDat, stateDat, change_30_60, label3060, repDate, height, width, col_domain, col_range, col_domain_cum100k, col_domain_cum, col_domain_positivity } = this.state;
         if (repDate) {
             return (
                 <div className="page-content">                    
@@ -43,8 +55,8 @@ class Tests extends Component {
                         rep_type="tests_change_30_60"
                         rep_date={repDate}
                         label3060={label3060}
-                        col_domain={[-10, 40, 100]}
-                        col_range={['#ffc6c4', '#cc607d', '#672044']}
+                        col_domain={col_domain}
+                        col_range={col_range}
                         width={width}
                         height={height}
                     />
@@ -60,8 +72,8 @@ class Tests extends Component {
                         rep_type="positivity_change_30_60"
                         rep_date={repDate}
                         label3060={label3060}
-                        col_domain={[-20, 75, 200]}
-                        col_range={['#ffc6c4', '#cc607d', '#672044']}
+                        col_domain={col_domain_positivity}
+                        col_range={col_range}
                         width={width}
                         height={height}
                     />
@@ -76,8 +88,8 @@ class Tests extends Component {
                         state_dat={stateDat}
                         rep_type="cumulative_tests"
                         rep_date={repDate}
-                        col_domain={[0, 3000000, 20000000]}
-                        col_range={['#ffc6c4', '#cc607d', '#672044']}
+                        col_domain={col_domain_cum}
+                        col_range={col_range}
                         width={width}
                         height={height}
                     />
@@ -89,8 +101,8 @@ class Tests extends Component {
                         state_dat={stateDat}
                         rep_type="cumulative_tests_100k"
                         rep_date={repDate}
-                        col_domain={[0, 40000, 100000]}
-                        col_range={['#ffc6c4', '#cc607d', '#672044']}
+                        col_domain={col_domain_cum100k}
+                        col_range={col_range}
                         width={width}
                         height={height}
                     />

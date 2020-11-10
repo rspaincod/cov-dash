@@ -17,14 +17,14 @@ export default class DataFetcher {
 
     async fetchUsWeeklyChanges() {
         const timeConv = d3.timeParse("%d-%b-%Y");
-        const dataset = d3.csv("http://localhost:3000/data/change_weekly_states.csv");
+        const dataset = d3.csv("../data/change_weekly_states.csv");
         const states = constants.States;
-        for (var i=0; i < states.length;i++){
-           // let state = 
-           // const result = words.filter(word => word.length > 6);
+        for (var i = 0; i < states.length; i++) {
+            // let state = 
+            // const result = words.filter(word => word.length > 6);
 
-           // For max element
-           // console.log(Math.max(...array1));
+            // For max element
+            // console.log(Math.max(...array1));
         }
 
         dataset.then(function (data) {
@@ -82,6 +82,32 @@ export default class DataFetcher {
                     this.mapdata.features[j].properties.totalTestResults = Number(this.current_states[i].totalTestResults);
 
                     this.mapdata.features[j].properties.abbr = this.current_states[i].state;
+
+                    // Add offsets for labels
+                    // DE, NH, RI, DE, DC
+                    if (this.current_states[i].state === 'CT' || this.current_states[i].state === 'DE' || this.current_states[i].state === 'NH' || this.current_states[i].state === 'RI' || this.current_states[i].state === 'DE' || this.current_states[i].state === 'DC') {
+                        switch (this.current_states[i].state) {
+                            case 'DC':
+                                this.mapdata.features[j].properties.offsetX = 80;
+                                break;
+                            case 'NH':
+                                this.mapdata.features[j].properties.offsetX = 60;
+                                break;
+                            case 'RI':
+                                this.mapdata.features[j].properties.offsetX = 60;
+                                break;
+                            case 'DE':
+                                this.mapdata.features[j].properties.offsetX = 80;
+                                this.mapdata.features[j].properties.offsetY = -20;
+                                break;
+                            case 'CT':
+                                this.mapdata.features[j].properties.offsetX = 60;
+                                this.mapdata.features[j].properties.offsetY = 20;
+                                break;
+                            default:
+                                this.mapdata.features[j].properties.offset = 80;
+                        }
+                    }
                 }
             }
             //reportDate = current_states[i].date;
@@ -132,5 +158,98 @@ export default class DataFetcher {
 
         });
 
+    }
+
+
+    //TODO: move to library.
+    getColDomain(d, c, typ){
+        var tot = 0;
+        var numbs = [];
+        var rng = [c.length];
+        var min = 0, max=0;
+        if (typ === 'cases_change_30_60'){
+            for (var i=0; i < d.length;i++){
+                numbs.push(Number(d[i].positiveIncreasePercMonth));
+                tot+= numbs[i];            
+            }
+        }
+        if (typ === 'cumulative_cases_100k'){
+            //positive100k
+            for (var i=0; i < d.length;i++){
+                numbs.push(Number(d[i].positive100k));
+                tot+= numbs[i];            
+            }
+        }
+
+        if (typ === 'cumulative_cases'){
+            //positive100k
+            for (var i=0; i < d.length;i++){
+                numbs.push(Number(d[i].positive));
+                tot+= numbs[i];            
+            }
+        }
+
+        if (typ === 'deaths_change_30_60'){
+            for (var i=0; i < d.length;i++){
+                numbs.push(Number(d[i].deathIncreasePercMonth));
+                tot+= numbs[i];            
+            }
+        }
+
+        if (typ === 'cumulative_deaths'){
+            for (var i=0; i < d.length;i++){
+                numbs.push(Number(d[i].death));
+                tot+= numbs[i];            
+            }
+        }
+
+        if (typ === 'cumulative_deaths_100k'){
+            for (var i=0; i < d.length;i++){
+                numbs.push(Number(d[i].death100k));
+                tot+= numbs[i];            
+            }
+        }
+
+       
+        if (typ === 'tests_change_30_60'){
+            for (var i=0; i < d.length;i++){
+                numbs.push(Number(d[i].totalTestResultsIncreasePercMonth));
+                tot+= numbs[i];            
+            }
+        }
+        
+        if (typ === 'positivity_change_30_60'){
+            for (var i=0; i < d.length;i++){
+                numbs.push(Number(d[i].positivePercentageIncreaseMonth));
+                tot+= numbs[i];            
+            }
+        }
+        
+        if (typ === 'cumulative_tests'){
+            for (var i=0; i < d.length;i++){
+                numbs.push(Number(d[i].totalTestResults));
+                tot+= numbs[i];            
+            }
+        }
+        
+        if (typ === 'cumulative_tests_100k'){
+            for (var i=0; i < d.length;i++){
+                numbs.push(Number(d[i].totalTestResults100k));
+                tot+= numbs[i];            
+            }
+        }
+       
+        var avg = tot / d.length;
+        rng[Math.floor(c.length / 2)] = avg;
+        rng[0] = Math.min(...numbs);
+        rng[c.length-1] = Math.max(...numbs);
+        var m = Math.abs(rng[Math.floor(c.length / 2)] - rng[0]);
+        //cheat until fix
+        rng[2] = avg - Math.floor(m/3) * 1;
+        rng[1] = avg - Math.floor(m/3) * 2;
+        m = rng[c.length-1] - Math.abs(rng[Math.floor(c.length / 2)]) ;
+        rng[4] = avg +  Math.floor(m/3) * 1;
+        rng[5] = avg +  Math.floor(m/3) * 2;
+        return rng;
     }
 }

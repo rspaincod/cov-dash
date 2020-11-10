@@ -14,6 +14,9 @@ class Cases extends Component {
         });
     }
 
+   
+
+
     async loadData() {
         var width = window.innerWidth, height = window.innerHeight * .75;
 
@@ -33,6 +36,11 @@ class Cases extends Component {
             totalTestResults100k: Number(f.current_US[0].totalTestResults100k),
             hospitalized100k: Number(f.current_US[0].hospitalized100k)
         }
+        var colors = ['#009392','#72aaa1','#b1c7b3','#f1eac8','#e5b9ad','#d98994','#d0587e'];
+        var col_domain = f.getColDomain(f.change_30_60, colors, 'cases_change_30_60');
+        var col_domain_cum100k = f.getColDomain(f.current_states, colors, 'cumulative_cases_100k');
+        var col_domain_cum = f.getColDomain(f.current_states, colors, 'cumulative_cases');
+       
         this.setState({
             stateDat: f.current_states
             , change_30_60: f.change_30_60
@@ -43,11 +51,15 @@ class Cases extends Component {
             , height: height
             , repDate: f.change_report_date
             , label3060: f.change_report_date_3060_message
+            , col_domain: col_domain
+            , col_range: colors
+            , col_domain_cum100k: col_domain_cum100k
+            , col_domain_cum: col_domain_cum
         });
     }
 
     render() {
-        const { mapDat, change_30_60, change_30_60_US, current_US, stateDat, repDate, label3060, height, width } = this.state;
+        const { mapDat, change_30_60, change_30_60_US, current_US, stateDat, repDate, label3060, height, width, col_domain, col_range, col_domain_cum100k, col_domain_cum } = this.state;
         if (repDate) {
             return (
                 <div className="page-content">
@@ -57,8 +69,8 @@ class Cases extends Component {
                         rep_type="cases_change_30_60"
                         rep_date={repDate}
                         label3060={label3060}
-                        col_domain={[0, 120, 340]}
-                        col_range={['#ffc6c4', '#cc607d', '#672044']}
+                        col_domain={col_domain}
+                        col_range={col_range}
                         width={width}
                         height={height}
                     />
@@ -78,8 +90,8 @@ class Cases extends Component {
                         state_data_field="positive"
                         rep_type="cumulative_cases"
                         rep_date={repDate}
-                        col_domain={[0, 160493, 1000000]}
-                        col_range={['#ffc6c4', '#cc607d', '#672044']}
+                        col_domain={col_domain_cum}
+                        col_range={col_range}
                         width={width}
                         height={height}
                     />
@@ -95,8 +107,8 @@ class Cases extends Component {
                         state_data="data/current_states.csv"
                         rep_type="cumulative_cases_100k"
                         rep_date={repDate}
-                        col_domain={[0, 3000, 6000]}
-                        col_range={['#ffc6c4', '#cc607d', '#672044']}
+                        col_domain={col_domain_cum100k}
+                        col_range={col_range}
                         width={width}
                         height={height}
                     />
