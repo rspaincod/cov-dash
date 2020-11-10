@@ -74,6 +74,7 @@ class Cases extends Component {
                         width={width}
                         height={height}
                     />
+                    <div className="map-page-title">Cases</div>
                     <div id="cases_change_30_60"></div>
                     <div className="map-title">30 Day Change Average Daily Cases (average last month vs. this month)<br />
                         {label3060}
@@ -82,8 +83,7 @@ class Cases extends Component {
                     <div className="map-us-summary">
                         <div className="map-us-summary-subtitle">US {change_30_60_US.positiveIncreasePercMonth}%</div>
                         <div className="map-us-summary-value">[{change_30_60_US.positiveIncreaseAvgT1} / {change_30_60_US.positiveIncreaseAvgT2}]</div>
-                    </div>
-                    <br /><br />
+                    </div>                    
                     <UsStatesStaticViz
                         map_dat={mapDat}
                         state_dat={stateDat}
@@ -94,7 +94,8 @@ class Cases extends Component {
                         col_range={col_range}
                         width={width}
                         height={height}
-                    />
+                    />         
+                    <div className="map-page-title"></div>           
                     <div id="cumulative_cases"></div>
                     <div className="map-title">Cumulative Cases {repDate}</div>
                     <div className="map-description"></div>
@@ -112,6 +113,7 @@ class Cases extends Component {
                         width={width}
                         height={height}
                     />
+                    <div className="map-page-title"></div>
                     <div id="cumulative_cases_100k"></div>
                     <div className="map-title">Cumulative cases per. 100k population {repDate}</div>
                     <div className="map-description"></div>

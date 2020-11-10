@@ -72,6 +72,7 @@ class Deaths extends Component {
                         width={width}
                         height={height}
                     />
+                    <div className="map-page-title">Deaths</div>
                     <div id="deaths_change_30_60"></div>
                     <div className="map-title">30 Day Change Average Daily Deaths (average last month vs. this month)<br />
                         {label3060}
@@ -91,6 +92,7 @@ class Deaths extends Component {
                         width={width}
                         height={height}
                     />
+                    <div className="map-page-title"></div>
                     <div id="cumulative_deaths"></div>
                     <div className="map-title">Cumulative Deaths {repDate}</div>
                     <div className="map-description"></div>
@@ -104,6 +106,7 @@ class Deaths extends Component {
                         width={width}
                         height={height}
                     />
+                    <div className="map-page-title"></div>
                     <div id="cumulative_deaths_100k"></div>
                     <div className="map-title">Cumulative Deaths per. 100k population {repDate}</div>
                 </div>

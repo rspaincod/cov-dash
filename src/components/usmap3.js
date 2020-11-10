@@ -295,28 +295,7 @@ class UsMap3 extends Component {
         // Bind the data to the SVG and create one path per GeoJSON feature  
         if (svg.empty()) {
             this.createMap(svg, path, width, height);
-        /*
-            for (var i = 0; i < stateChangeObj.length; i++) {
-                var csvState = stateChangeObj[i].StateName;
-                var PosAvgPercChange = Number(stateChangeObj[i].PosAvgPercChange);
-                var DeathPercChange = Number(stateChangeObj[i].DeathPercChange);
-                var csvWeek = Number(stateChangeObj[i].Week);
-    
-                for (var j = 0; j < this.state.jsonData.features.length; j++) {
-                    var jsonStateName = this.state.jsonData.features[j].properties.name;
-    
-                    if (csvState == jsonStateName) {
-                        // Copy the data value into the JSON
-                        this.state.jsonData.features[j].properties.PosAvgPercChange = PosAvgPercChange;
-                        this.state.jsonData.features[j].properties.DeathPercChange = DeathPercChange;
-                        this.state.jsonData.features[j].properties.Week = csvWeek;
-                        // Stop looking through the JSON
-                        break;
-                    }
-                }
-            }
-        */
-    
+       
         } else {
             this.resetMap();
         }
