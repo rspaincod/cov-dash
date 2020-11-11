@@ -18,17 +18,16 @@ class Cases extends Component {
 
 
     async loadData() {
-        var width = window.innerWidth, height = window.innerHeight * .75;
-
+        const width = window.innerWidth, height = window.innerHeight * .75;
         const f = new DataFetch();
         await f.fetchUsMap();
 
-        var change_30_60_US = {
+        const change_30_60_US = {
             positiveIncreaseAvgT1: Math.round(Number(f.change_30_60_US[0].positiveIncreaseAvgT1), 1).toLocaleString('en'),
             positiveIncreaseAvgT2: Math.round(Number(f.change_30_60_US[0].positiveIncreaseAvgT2), 1).toLocaleString('en'),
             positiveIncreasePercMonth: Math.round(Number(f.change_30_60_US[0].positiveIncreasePercMonth), 1).toLocaleString('en'),
         }
-        var current_US = {
+        const current_US = {
             pop: Number(f.current_US[0].Pop),
             positive: Number(f.current_US[0].positive),
             positive100k: Number(f.current_US[0].positive100k),
@@ -36,10 +35,10 @@ class Cases extends Component {
             totalTestResults100k: Number(f.current_US[0].totalTestResults100k),
             hospitalized100k: Number(f.current_US[0].hospitalized100k)
         }
-        var colors = ['#009392','#72aaa1','#b1c7b3','#f1eac8','#e5b9ad','#d98994','#d0587e'];
-        var col_domain = f.getColDomain(f.change_30_60, colors, 'cases_change_30_60');
-        var col_domain_cum100k = f.getColDomain(f.current_states, colors, 'cumulative_cases_100k');
-        var col_domain_cum = f.getColDomain(f.current_states, colors, 'cumulative_cases');
+        const colors = ['#009392','#72aaa1','#b1c7b3','#f1eac8','#e5b9ad','#d98994','#d0587e'];
+        const col_domain = f.getColDomain(f.change_30_60, colors, 'cases_change_30_60');
+        const col_domain_cum100k = f.getColDomain(f.current_states, colors, 'cumulative_cases_100k');
+        const col_domain_cum = f.getColDomain(f.current_states, colors, 'cumulative_cases');
        
         this.setState({
             stateDat: f.current_states

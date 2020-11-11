@@ -186,7 +186,7 @@ class UsMap3 extends Component {
             d3.csv('http://localhost:3000/data/sevendayavg.csv')];
 
         await Promise.all(promises).then((values) => {
-            var citySorted = values[1].sort((a, b) => a.date - b.date);
+           // var citySorted = values[1].sort((a, b) => a.date - b.date);
             var orgMessage = values[1][0].WeekEndDate;
             this.state = { 
                 message: orgMessage, 

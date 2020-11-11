@@ -16,15 +16,15 @@ class Hosp extends Component {
     }
 
     async loadData() {
-        var width = window.innerWidth, height = window.innerHeight * .75;
+        let width = window.innerWidth, height = window.innerHeight * .75;
        
         const f = new DataFetch();
         await f.fetchUsMap();
 
-        var colors = ['#009392','#72aaa1','#b1c7b3','#f1eac8','#e5b9ad','#d98994','#d0587e'];
-        var col_domain = f.getColDomain(f.change_30_60, colors, 'hospitalizations_change_30_60');
-        var col_domain_cum100k = f.getColDomain(f.current_states, colors, 'cumulative_hospitalizations_100k');
-        var col_domain_cum = f.getColDomain(f.current_states, colors, 'cumulative_hospitalizations');
+        let colors = ['#009392','#72aaa1','#b1c7b3','#f1eac8','#e5b9ad','#d98994','#d0587e'];
+        let col_domain = f.getColDomain(f.change_30_60, colors, 'hospitalizations_change_30_60');
+        let col_domain_cum100k = f.getColDomain(f.current_states, colors, 'cumulative_hospitalizations_100k');
+        let col_domain_cum = f.getColDomain(f.current_states, colors, 'cumulative_hospitalizations');
 
         this.setState({
             stateDat: f.current_states

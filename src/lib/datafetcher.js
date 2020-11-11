@@ -19,7 +19,7 @@ export default class DataFetcher {
         const timeConv = d3.timeParse("%d-%b-%Y");
         const dataset = d3.csv("../data/change_weekly_states.csv");
         const states = constants.States;
-        for (var i = 0; i < states.length; i++) {
+        for (let i = 0; i < states.length; i++) {
             // let state = 
             // const result = words.filter(word => word.length > 6);
 
@@ -153,7 +153,7 @@ export default class DataFetcher {
     async fetchCurrentStates(stateOverride) {
         const promise = d3.csv('http://localhost:3000/data/current_states.csv');
         await Promise.all(promise).then((values) => {
-            var dat = values[0];
+           // var dat = values[0];
 
 
         });
@@ -163,9 +163,9 @@ export default class DataFetcher {
 
     //TODO: move to library.
     getColDomain(d, c, typ){
-        var tot = 0;
-        var numbs = [];
-        var rng = [c.length];
+        let tot = 0;
+        let numbs = [];
+        let rng = [c.length];
        // var min = 0, max=0;
         if (typ === 'cases_change_30_60'){
             for (let i=0; i < d.length;i++){
@@ -248,11 +248,11 @@ export default class DataFetcher {
                 tot+= numbs[i];            
             }
         }   
-        var avg = tot / d.length;
+        let avg = tot / d.length;
         rng[Math.floor(c.length / 2)] = avg;
         rng[0] = Math.min(...numbs);
         rng[c.length-1] = Math.max(...numbs);
-        var m = Math.abs(rng[Math.floor(c.length / 2)] - rng[0]);
+        let m = Math.abs(rng[Math.floor(c.length / 2)] - rng[0]);
         //cheat until fix. Dependency on 7 colors.
         rng[2] = avg - Math.floor(m/3) * 1;
         rng[1] = avg - Math.floor(m/3) * 2;
