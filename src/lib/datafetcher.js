@@ -151,7 +151,7 @@ export default class DataFetcher {
 
 
     async fetchCurrentStates(stateOverride) {
-        const promise = d3.csv('http://localhost:3000/data/current_states.csv');
+        const promise = d3.csv('../data/current_states.csv');
         await Promise.all(promise).then((values) => {
            // var dat = values[0];
 

@@ -182,8 +182,8 @@ class UsMap3 extends Component {
     async loadMapData() {
         console.log('Enter loadMapData()');
         const promises =
-            [d3.json('http://localhost:3000/data/us-states.json'),
-            d3.csv('http://localhost:3000/data/sevendayavg.csv')];
+            [d3.json('../data/us-states.json'),
+            d3.csv('../data/sevendayavg.csv')];
 
         await Promise.all(promises).then((values) => {
            // var citySorted = values[1].sort((a, b) => a.date - b.date);
