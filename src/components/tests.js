@@ -15,16 +15,15 @@ class Tests extends Component {
     }
 
     async loadData() {
-        var width = window.innerWidth, height = window.innerHeight * .75;
-        
+        const width = window.innerWidth, height = window.innerHeight * .75;        
         const f = new DataFetch();
         await f.fetchUsMap();
 
-        var colors = ['#009392','#72aaa1','#b1c7b3','#f1eac8','#e5b9ad','#d98994','#d0587e'];
-        var col_domain = f.getColDomain(f.change_30_60, colors, 'tests_change_30_60');
-        var col_domain_cum100k = f.getColDomain(f.current_states, colors, 'cumulative_tests_100k');
-        var col_domain_cum = f.getColDomain(f.current_states, colors, 'cumulative_tests');
-        var col_domain_positivity = f.getColDomain(f.change_30_60, colors, 'positivity_change_30_60');
+        const colors = ['#009392','#72aaa1','#b1c7b3','#f1eac8','#e5b9ad','#d98994','#d0587e'];
+        const col_domain = f.getColDomain(f.change_30_60, colors, 'tests_change_30_60');
+        const col_domain_cum100k = f.getColDomain(f.current_states, colors, 'cumulative_tests_100k');
+        const col_domain_cum = f.getColDomain(f.current_states, colors, 'cumulative_tests');
+        const col_domain_positivity = f.getColDomain(f.change_30_60, colors, 'positivity_change_30_60');
 
 
         this.setState({
@@ -60,6 +59,7 @@ class Tests extends Component {
                         width={width}
                         height={height}
                     />
+                    <div className="map-page-title">Tests</div>
                     <div id="tests_change_30_60"></div>
                     <div className="map-title">30 Day Change Average Daily Tests (average last month vs. this month)<br />
                         {label3060}
@@ -77,6 +77,7 @@ class Tests extends Component {
                         width={width}
                         height={height}
                     />
+                    <div className="map-page-title"></div>
                     <div id="positivity_change_30_60"></div>
                     <div className="map-title">30 Day Change Average Daily Positivity (average last month vs. this month)<br />
                         {label3060}
@@ -93,6 +94,7 @@ class Tests extends Component {
                         width={width}
                         height={height}
                     />
+                     <div className="map-page-title"></div>
                     <div id="cumulative_tests"></div>
                     <div className="map-title">Cumulative Tests {repDate}</div>
                     <div className="map-description"></div>
@@ -106,6 +108,7 @@ class Tests extends Component {
                         width={width}
                         height={height}
                     />
+                     <div className="map-page-title"></div>
                     <div id="cumulative_tests_100k"></div>
                     <div className="map-title">Cumulative Tests per. 100k population {repDate}</div>
                 </div>

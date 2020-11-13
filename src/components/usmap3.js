@@ -182,11 +182,11 @@ class UsMap3 extends Component {
     async loadMapData() {
         console.log('Enter loadMapData()');
         const promises =
-            [d3.json('http://localhost:3000/data/us-states.json'),
-            d3.csv('http://localhost:3000/data/sevendayavg.csv')];
+            [d3.json('../data/us-states.json'),
+            d3.csv('../data/sevendayavg.csv')];
 
         await Promise.all(promises).then((values) => {
-            var citySorted = values[1].sort((a, b) => a.date - b.date);
+           // var citySorted = values[1].sort((a, b) => a.date - b.date);
             var orgMessage = values[1][0].WeekEndDate;
             this.state = { 
                 message: orgMessage, 
@@ -295,28 +295,7 @@ class UsMap3 extends Component {
         // Bind the data to the SVG and create one path per GeoJSON feature  
         if (svg.empty()) {
             this.createMap(svg, path, width, height);
-        /*
-            for (var i = 0; i < stateChangeObj.length; i++) {
-                var csvState = stateChangeObj[i].StateName;
-                var PosAvgPercChange = Number(stateChangeObj[i].PosAvgPercChange);
-                var DeathPercChange = Number(stateChangeObj[i].DeathPercChange);
-                var csvWeek = Number(stateChangeObj[i].Week);
-    
-                for (var j = 0; j < this.state.jsonData.features.length; j++) {
-                    var jsonStateName = this.state.jsonData.features[j].properties.name;
-    
-                    if (csvState == jsonStateName) {
-                        // Copy the data value into the JSON
-                        this.state.jsonData.features[j].properties.PosAvgPercChange = PosAvgPercChange;
-                        this.state.jsonData.features[j].properties.DeathPercChange = DeathPercChange;
-                        this.state.jsonData.features[j].properties.Week = csvWeek;
-                        // Stop looking through the JSON
-                        break;
-                    }
-                }
-            }
-        */
-    
+       
         } else {
             this.resetMap();
         }

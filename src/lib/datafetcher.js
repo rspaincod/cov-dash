@@ -19,7 +19,7 @@ export default class DataFetcher {
         const timeConv = d3.timeParse("%d-%b-%Y");
         const dataset = d3.csv("../data/change_weekly_states.csv");
         const states = constants.States;
-        for (var i = 0; i < states.length; i++) {
+        for (let i = 0; i < states.length; i++) {
             // let state = 
             // const result = words.filter(word => word.length > 6);
 
@@ -151,9 +151,9 @@ export default class DataFetcher {
 
 
     async fetchCurrentStates(stateOverride) {
-        const promise = d3.csv('http://localhost:3000/data/current_states.csv');
+        const promise = d3.csv('../data/current_states.csv');
         await Promise.all(promise).then((values) => {
-            var dat = values[0];
+           // var dat = values[0];
 
 
         });
@@ -163,88 +163,97 @@ export default class DataFetcher {
 
     //TODO: move to library.
     getColDomain(d, c, typ){
-        var tot = 0;
-        var numbs = [];
-        var rng = [c.length];
-        var min = 0, max=0;
+        let tot = 0;
+        let numbs = [];
+        let rng = [c.length];
+       // var min = 0, max=0;
         if (typ === 'cases_change_30_60'){
-            for (var i=0; i < d.length;i++){
+            for (let i=0; i < d.length;i++){
                 numbs.push(Number(d[i].positiveIncreasePercMonth));
                 tot+= numbs[i];            
             }
         }
         if (typ === 'cumulative_cases_100k'){
             //positive100k
-            for (var i=0; i < d.length;i++){
+            for (let i=0; i < d.length;i++){
                 numbs.push(Number(d[i].positive100k));
                 tot+= numbs[i];            
             }
         }
-
         if (typ === 'cumulative_cases'){
             //positive100k
-            for (var i=0; i < d.length;i++){
+            for (let i=0; i < d.length;i++){
                 numbs.push(Number(d[i].positive));
                 tot+= numbs[i];            
             }
         }
-
         if (typ === 'deaths_change_30_60'){
-            for (var i=0; i < d.length;i++){
+            for (let i=0; i < d.length;i++){
                 numbs.push(Number(d[i].deathIncreasePercMonth));
                 tot+= numbs[i];            
             }
         }
-
         if (typ === 'cumulative_deaths'){
-            for (var i=0; i < d.length;i++){
+            for (let i=0; i < d.length;i++){
                 numbs.push(Number(d[i].death));
                 tot+= numbs[i];            
             }
         }
-
         if (typ === 'cumulative_deaths_100k'){
-            for (var i=0; i < d.length;i++){
+            for (let i=0; i < d.length;i++){
                 numbs.push(Number(d[i].death100k));
                 tot+= numbs[i];            
             }
-        }
-
-       
+        }       
         if (typ === 'tests_change_30_60'){
-            for (var i=0; i < d.length;i++){
+            for (let i=0; i < d.length;i++){
                 numbs.push(Number(d[i].totalTestResultsIncreasePercMonth));
                 tot+= numbs[i];            
             }
-        }
-        
+        }        
         if (typ === 'positivity_change_30_60'){
-            for (var i=0; i < d.length;i++){
+            for (let i=0; i < d.length;i++){
                 numbs.push(Number(d[i].positivePercentageIncreaseMonth));
                 tot+= numbs[i];            
             }
-        }
-        
+        }        
         if (typ === 'cumulative_tests'){
-            for (var i=0; i < d.length;i++){
+            for (let i=0; i < d.length;i++){
                 numbs.push(Number(d[i].totalTestResults));
                 tot+= numbs[i];            
             }
-        }
-        
+        }        
         if (typ === 'cumulative_tests_100k'){
-            for (var i=0; i < d.length;i++){
+            for (let i=0; i < d.length;i++){
                 numbs.push(Number(d[i].totalTestResults100k));
                 tot+= numbs[i];            
             }
-        }
-       
-        var avg = tot / d.length;
+        }   
+
+        if (typ === 'cumulative_hospitalizations'){
+            for (let i=0; i < d.length;i++){
+                numbs.push(Number(d[i].hospitalized));
+                tot+= numbs[i];            
+            }
+        }   
+        if (typ === 'cumulative_hospitalizations_100k'){
+            for (let i=0; i < d.length;i++){
+                numbs.push(Number(d[i].hospitalized100k));
+                tot+= numbs[i];            
+            }
+        }   
+        if (typ === 'hospitalizations_change_30_60'){
+            for (let i=0; i < d.length;i++){
+                numbs.push(Number(d[i].hospitalizedIncreasePercMonth));
+                tot+= numbs[i];            
+            }
+        }   
+        let avg = tot / d.length;
         rng[Math.floor(c.length / 2)] = avg;
         rng[0] = Math.min(...numbs);
         rng[c.length-1] = Math.max(...numbs);
-        var m = Math.abs(rng[Math.floor(c.length / 2)] - rng[0]);
-        //cheat until fix
+        let m = Math.abs(rng[Math.floor(c.length / 2)] - rng[0]);
+        //cheat until fix. Dependency on 7 colors.
         rng[2] = avg - Math.floor(m/3) * 1;
         rng[1] = avg - Math.floor(m/3) * 2;
         m = rng[c.length-1] - Math.abs(rng[Math.floor(c.length / 2)]) ;

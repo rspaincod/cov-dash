@@ -16,27 +16,25 @@ class Deaths extends Component {
     }
 
     async loadData() {
-        var width = window.innerWidth, height = window.innerHeight * .75;
-        
+        const width = window.innerWidth, height = window.innerHeight * .75;        
         const f = new DataFetch();
-        await f.fetchUsMap();
-        
-        var usDeaths = {
+        await f.fetchUsMap();        
+        const usDeaths = {
             deathIncreaseAvgT1: Math.round(Number(f.change_30_60_US[0].deathIncreaseAvgT1), 1).toLocaleString('en'),
             deathIncreaseAvgT2: Math.round(Number(f.change_30_60_US[0].deathIncreaseAvgT2), 1).toLocaleString('en'),
             deathIncreasePercMonth: Math.round(Number(f.change_30_60_US[0].deathIncreasePercMonth), 1).toLocaleString('en'),
         }
 
-        var current_US = {
+        const current_US = {
             pop: Number(f.current_US[0].Pop),
             death: Number(f.current_US[0].death),
             death100k: Number(f.current_US[0].death100k)
         }
 
-        var colors = ['#009392','#72aaa1','#b1c7b3','#f1eac8','#e5b9ad','#d98994','#d0587e'];
-        var col_domain = f.getColDomain(f.change_30_60, colors, 'deaths_change_30_60');
-        var col_domain_cum100k = f.getColDomain(f.current_states, colors, 'cumulative_deaths_100k');
-        var col_domain_cum = f.getColDomain(f.current_states, colors, 'cumulative_deaths');
+        const colors = ['#009392','#72aaa1','#b1c7b3','#f1eac8','#e5b9ad','#d98994','#d0587e'];
+        const col_domain = f.getColDomain(f.change_30_60, colors, 'deaths_change_30_60');
+        const col_domain_cum100k = f.getColDomain(f.current_states, colors, 'cumulative_deaths_100k');
+        const col_domain_cum = f.getColDomain(f.current_states, colors, 'cumulative_deaths');
 
         this.setState({
             stateDat: f.current_states
@@ -57,7 +55,7 @@ class Deaths extends Component {
     }
 
     render() {
-        const { mapDat, change_30_60, change_30_60_US, current_US, label3060, stateDat, repDate, height, width, col_domain, col_range, col_domain_cum100k, col_domain_cum  } = this.state;
+        const { mapDat, change_30_60, change_30_60_US, label3060, stateDat, repDate, height, width, col_domain, col_range, col_domain_cum100k, col_domain_cum  } = this.state;
         if (repDate) {
             return (
                 <div className="page-content">
@@ -72,6 +70,7 @@ class Deaths extends Component {
                         width={width}
                         height={height}
                     />
+                    <div className="map-page-title">Deaths</div>
                     <div id="deaths_change_30_60"></div>
                     <div className="map-title">30 Day Change Average Daily Deaths (average last month vs. this month)<br />
                         {label3060}
@@ -91,6 +90,7 @@ class Deaths extends Component {
                         width={width}
                         height={height}
                     />
+                    <div className="map-page-title"></div>
                     <div id="cumulative_deaths"></div>
                     <div className="map-title">Cumulative Deaths {repDate}</div>
                     <div className="map-description"></div>
@@ -104,6 +104,7 @@ class Deaths extends Component {
                         width={width}
                         height={height}
                     />
+                    <div className="map-page-title"></div>
                     <div id="cumulative_deaths_100k"></div>
                     <div className="map-title">Cumulative Deaths per. 100k population {repDate}</div>
                 </div>

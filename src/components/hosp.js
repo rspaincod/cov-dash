@@ -16,10 +16,15 @@ class Hosp extends Component {
     }
 
     async loadData() {
-        var width = window.innerWidth, height = window.innerHeight * .75;
+        let width = window.innerWidth, height = window.innerHeight * .75;
        
         const f = new DataFetch();
         await f.fetchUsMap();
+
+        let colors = ['#009392','#72aaa1','#b1c7b3','#f1eac8','#e5b9ad','#d98994','#d0587e'];
+        let col_domain = f.getColDomain(f.change_30_60, colors, 'hospitalizations_change_30_60');
+        let col_domain_cum100k = f.getColDomain(f.current_states, colors, 'cumulative_hospitalizations_100k');
+        let col_domain_cum = f.getColDomain(f.current_states, colors, 'cumulative_hospitalizations');
 
         this.setState({
             stateDat: f.current_states
@@ -30,12 +35,16 @@ class Hosp extends Component {
             , height: height
             , repDate: f.change_report_date
             , label3060: f.change_report_date_3060_message
+            , col_domain: col_domain
+            , col_range: colors
+            , col_domain_cum100k: col_domain_cum100k
+            , col_domain_cum: col_domain_cum
         });
     }
   
 
     render() {
-        const { mapDat, stateDat, repDate,change_30_60, change_30_60_US, label3060, height, width } = this.state;
+        const { mapDat, stateDat, repDate,change_30_60, change_30_60_US, label3060, height, width, col_domain, col_range, col_domain_cum100k, col_domain_cum  } = this.state;
         if (repDate) {
             return (
                 <div className="page-content">
@@ -45,11 +54,15 @@ class Hosp extends Component {
                         rep_type="hospitalizations_change_30_60"
                         rep_date={repDate}
                         label3060={label3060}
-                        col_domain={[0, 120, 340]}
-                        col_range={['#ffc6c4', '#cc607d', '#672044']}
+                        col_domain={col_domain}
+                        col_range={col_range}
                         width={width}
                         height={height}
                     />
+                    <div className="map-page-title">Hospitalizations</div>
+                    <div className="map-description map-note"><b>Note:</b> COVID-19 hospitalizations data was either not reported or not available for the following states.<br/>
+                    California, Washington DC, District of Columbia, Delaware, Illinois, Louisiana, Michigan, Missouri, North Carolina, Nevada, Texas
+                    </div>
                     <div id="hospitalizations_change_30_60"></div>
                     <div className="map-title">30 Day Change Average Daily Hospitalizations (average last month vs. this month)<br />
                         {label3060}
@@ -66,11 +79,12 @@ class Hosp extends Component {
                         state_data_field="positive"
                         rep_type="cumulative_hosp"
                         rep_date={repDate}
-                        col_domain={[0, 5000,  200000, 1000000]}
-                        col_range={['#eee', '#ffc6c4', '#cc607d', '#672044']}
+                        col_domain={col_domain_cum}
+                        col_range={col_range}
                         width={width}
                         height={height}
                     />
+                    <div className="map-page-title"></div>
                     <div id="cumulative_hosp"></div>
                     <div className="map-title">Cumulative Hospitalizations {repDate}</div>
                     <div className="map-description"></div>
@@ -80,11 +94,12 @@ class Hosp extends Component {
                         state_data="data/current_states.csv"
                         rep_type="cumulative_hosp_100k"
                         rep_date={repDate}
-                        col_domain={[-999999, 0, 200, 500]}
-                        col_range={['#eee', '#ffc6c4', '#cc607d', '#672044']}
+                        col_domain={col_domain_cum100k}
+                        col_range={col_range}
                         width={width}
                         height={height}
                     />
+                     <div className="map-page-title"></div>
                     <div id="cumulative_hosp_100k"></div>
                     <div className="map-title">Cumulative Hospitalizations per. 100k population {repDate}</div>
                 </div>
