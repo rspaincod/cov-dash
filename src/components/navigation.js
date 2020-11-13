@@ -14,7 +14,7 @@ const Navigation = () => {
          <NavLink className="nav-link" activeClassName="nav-link-active" to="/hosp">Hospitalizations Maps</NavLink>
          
          <NavLink className="nav-link" activeClassName="nav-link-active" to="/map3">Timeline Animations</NavLink>
-         <NavLink className="nav-link" activeClassName="nav-link-active" to="/charts">Charts</NavLink>
+       
       </div>
    );
 }
